@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * Service layer for managing products.
+ * Handles business logic and interacts with the ProductRepository.
+ */
 @Service
 public class ProductService {
     private final ProductRepository productRepository;

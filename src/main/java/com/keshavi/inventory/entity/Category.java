@@ -6,6 +6,10 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * Represents a category for grouping products.
+ * Each category can have multiple products.
+ */
 @Getter
 @Setter
 @Entity

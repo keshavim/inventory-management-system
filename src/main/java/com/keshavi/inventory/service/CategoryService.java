@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * Service layer for managing categories.
+ * Handles business logic and interacts with the CategoryRepository.
+ */
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;

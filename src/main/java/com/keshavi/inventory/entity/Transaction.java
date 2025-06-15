@@ -6,6 +6,10 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a transaction that changes the stock quantity of a product.
+ * Used for recording sales, restocks, and manual adjustments.
+ */
 @Getter
 @Setter
 @Entity

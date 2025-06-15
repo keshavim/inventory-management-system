@@ -9,6 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Service layer for managing inventory transactions.
+ * Handles business logic for recording transactions and updating product stock.
+ */
 @Service
 public class TransactionService {
     private final TransactionRepository transactionRepository;
