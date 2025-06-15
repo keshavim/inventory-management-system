@@ -1,6 +1,8 @@
 package com.keshavi.inventory.controller;
 
+import com.keshavi.inventory.dto.StockReportDTO;
 import com.keshavi.inventory.entity.Product;
+import com.keshavi.inventory.repository.ProductRepository;
 import com.keshavi.inventory.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 /**
@@ -19,9 +22,11 @@ import java.util.NoSuchElementException;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductRepository productRepository;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, ProductRepository productRepository) {
         this.productService = productService;
+        this.productRepository = productRepository;
     }
 
     // GET all products
@@ -62,5 +67,11 @@ public class ProductController {
     public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping("/stock-report")
+    public List<StockReportDTO> getStockReport() {
+        return productService.getStockReport();
+    }
+
 }
 

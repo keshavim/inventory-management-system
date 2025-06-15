@@ -1,11 +1,13 @@
 package com.keshavi.inventory.service;
 
+import com.keshavi.inventory.dto.StockReportDTO;
 import com.keshavi.inventory.entity.Product;
 import com.keshavi.inventory.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 /**
  * Service layer for managing products.
@@ -47,6 +49,18 @@ public class ProductService {
         productRepository.delete(product);
     }
 
+    public List<StockReportDTO> getStockReport() {
+        List<Product> products = productRepository.findAll();
+        return products.stream()
+                .map(p -> new StockReportDTO(
+                        p.getId(),
+                        p.getName(),
+                        p.getSku(),
+                        p.getStockQuantity(),
+                        p.getCategory() != null ? p.getCategory().getName() : null
+                ))
+                .collect(Collectors.toList());
+    }
 
-    // Add more methods as needed (create, update, delete, etc.)
+
 }
