@@ -1,6 +1,5 @@
-package com.keshavi.inventory.config;
+package com.keshavi.inventory.security;
 
-import jakarta.validation.constraints.Null;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
@@ -53,7 +52,7 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(@NonNull CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000") // React dev server
+                        .allowedOrigins("http://localhost:5173") // React dev server
                         .allowedMethods("*")
                         .allowedHeaders("*")
                         .allowCredentials(true);
