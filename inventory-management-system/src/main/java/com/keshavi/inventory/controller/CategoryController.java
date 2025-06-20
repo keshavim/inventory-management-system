@@ -13,6 +13,7 @@ import java.util.List;
  * REST controller for managing categories.
  * Exposes endpoints for CRUD operations on categories.
  */
+@CrossOrigin(origins = "http://localhost:5174")
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {

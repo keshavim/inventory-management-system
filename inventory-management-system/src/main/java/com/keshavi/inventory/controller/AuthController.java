@@ -7,15 +7,13 @@ import com.keshavi.inventory.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * REST controller for authentication endpoints.
  * Handles user registration and login.
  */
+@CrossOrigin(origins = "http://localhost:5174")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

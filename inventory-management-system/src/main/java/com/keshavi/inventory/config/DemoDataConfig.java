@@ -29,7 +29,7 @@ public class DemoDataConfig {
                 product.setName("Demo Product");
                 product.setSku("DEMO-001");
                 product.setPrice(100);
-                product.setStockQuantity(10);
+                product.setQuantity(10);
                 product.setDescription("This is a demo product.");
                 product.setCategory(category);
 

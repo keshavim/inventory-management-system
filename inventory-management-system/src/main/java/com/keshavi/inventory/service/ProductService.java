@@ -39,7 +39,7 @@ public class ProductService {
         product.setName(productDetails.getName());
         product.setSku(productDetails.getSku());
         product.setPrice(productDetails.getPrice());
-        product.setStockQuantity(productDetails.getStockQuantity());
+        product.setQuantity(productDetails.getQuantity());
         product.setDescription(productDetails.getDescription());
         return productRepository.save(product);
     }
@@ -56,7 +56,7 @@ public class ProductService {
                         p.getId(),
                         p.getName(),
                         p.getSku(),
-                        p.getStockQuantity(),
+                        p.getQuantity(),
                         p.getCategory() != null ? p.getCategory().getName() : null
                 ))
                 .collect(Collectors.toList());

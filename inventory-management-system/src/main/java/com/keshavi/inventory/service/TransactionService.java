@@ -33,8 +33,8 @@ public class TransactionService {
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
         // Update product stock
-        int newStock = product.getStockQuantity() + transaction.getQuantityChange();
-        product.setStockQuantity(newStock);
+        int newStock = product.getQuantity() + transaction.getQuantityChange();
+        product.setQuantity(newStock);
         productRepository.save(product);
 
         return transactionRepository.save(transaction);

@@ -32,8 +32,7 @@ public class SecurityConfig {
                 // Permit registration and login endpoints
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/api/auth/register",
-                                "/api/auth/login"
+                                "/api/**"
                         ).permitAll()
                         // All other endpoints require authentication
                         .anyRequest().authenticated()
@@ -51,9 +50,9 @@ public class SecurityConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(@NonNull CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173") // React dev server
-                        .allowedMethods("*")
+                registry.addMapping("/api/**")
+                        .allowedOrigins("http://localhost:5174")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*")
                         .allowCredentials(true);
             }

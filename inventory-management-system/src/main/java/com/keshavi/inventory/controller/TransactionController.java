@@ -14,6 +14,7 @@ import java.util.List;
  * REST controller for managing inventory transactions.
  * Exposes endpoints for recording and viewing transactions.
  */
+@CrossOrigin(origins = "http://localhost:5174")
 @RestController
 @RequestMapping("/api/transactions")
 public class TransactionController {

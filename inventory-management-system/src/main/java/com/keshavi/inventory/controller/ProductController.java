@@ -17,6 +17,7 @@ import java.util.NoSuchElementException;
  * REST controller for managing products.
  * Exposes endpoints for CRUD operations on products.
  */
+@CrossOrigin(origins = "http://localhost:5174")
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
