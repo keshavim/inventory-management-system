@@ -18,6 +18,7 @@ const Home: React.FC = () => {
             {products.map(product => (
                 <div key={product.id} style={{ border: "1px solid #ddd", borderRadius: "8px", padding: "16px" }}>
                     <h3>{product.name}</h3>
+                    <p>{product.sku}</p>
                     <p>{product.description}</p>
                     <p>Category: {product.category?.name}</p>
                     <p>Price: ${product.price}</p>

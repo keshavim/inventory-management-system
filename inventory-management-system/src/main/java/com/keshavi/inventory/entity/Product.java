@@ -10,7 +10,7 @@ import lombok.Setter;
 
 /**
  * Represents a product in the inventory system.
- * Each product has a name, SKU, price, stock quantity, description, and belongs to a category.
+ * Each product has a name, price, stock quantity, description, and belongs to a category.
  */
 @Setter
 @Getter

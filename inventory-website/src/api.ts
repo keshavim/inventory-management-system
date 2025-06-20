@@ -52,6 +52,7 @@ export const getProductById = async (id: number): Promise<Product> => {
 export const addProduct = async (product: Omit<Product, "id" | "category"> & { categoryId: number }): Promise<Product> => {
     const res = await axios.post<Product>("/api/products", {
         name: product.name,
+        sku: product.sku,
         description: product.description,
         price: product.price,
         quantity: product.quantity,

@@ -7,6 +7,7 @@ const AddProduct: React.FC = () => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [form, setForm] = useState({
         name: "",
+        sku: "",
         description: "",
         price: 0,
         quantity: 0,
@@ -34,12 +35,14 @@ const AddProduct: React.FC = () => {
         try {
             await addProduct({
                 name: form.name,
+                sku: form.sku, // <-- Send SKU
                 description: form.description,
                 price: Number(form.price),
                 quantity: Number(form.quantity),
                 categoryId: Number(form.categoryId),
             });
             navigate("/");
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
             alert("Failed to add product");
         }
@@ -76,6 +79,21 @@ const AddProduct: React.FC = () => {
                         />
                         <div style={{ fontSize: 12, color: "#666" }}>
                             The name of the product as it will appear in the store.
+                        </div>
+                    </label>
+                </div>
+                <div style={{ marginBottom: 10 }}>
+                    <label>
+                        SKU<br />
+                        <input
+                            name="sku"
+                            placeholder="E.g. SKU123"
+                            value={form.sku}
+                            onChange={handleChange}
+                            required
+                        />
+                        <div style={{ fontSize: 12, color: "#666" }}>
+                            Stock Keeping Unit (unique product code).
                         </div>
                     </label>
                 </div>
