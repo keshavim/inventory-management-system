@@ -1,27 +1,31 @@
 
 /**
- * AddProduct.tsx
+ * EditProduct.tsx
  *
- * This page provides a form for adding a new product to the inventory.
+ * This page provides a form for editing an existing product.
  *
  * Features:
- * - Form fields for product name, SKU, description, price, quantity, and category.
+ * - Fetches the product by ID and pre-fills the form.
+ * - Allows editing of all product fields (name, SKU, description, price, quantity, category).
  * - Dropdown to select a category, with the option to create a new category.
- * - Submits the new product to the backend API.
+ * - Submits the updated product to the backend API.
  * - Displays feedback on success or failure.
  *
  * Dependencies:
- * - Uses React Router for navigation.
- * - Relies on API functions for adding products and categories.
+ * - Uses React Router for navigation and route params.
+ * - Relies on API functions for fetching, updating products, and managing categories.
  */
 
 
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getCategories, addProduct, addCategory } from "../api";
+import { useNavigate, useParams } from "react-router-dom";
+import { getCategories, getProductById, updateProduct, addCategory } from "../api";
 import type { Category } from "../types/Category";
+import type { Product } from "../types/Product";
 
-const AddProduct: React.FC = () => {
+
+const EditProduct: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
     const [categories, setCategories] = useState<Category[]>([]);
     const [form, setForm] = useState({
         name: "",
@@ -31,17 +35,40 @@ const AddProduct: React.FC = () => {
         quantity: 0,
         categoryId: "",
     });
+    const [loading, setLoading] = useState(true);
     const [newCategoryName, setNewCategoryName] = useState("");
     const [addingCategory, setAddingCategory] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         fetchCategories();
-    }, []);
+        fetchProduct();
+        // eslint-disable-next-line
+    }, [id]);
 
     const fetchCategories = async () => {
         const data = await getCategories();
         setCategories(Array.isArray(data) ? data : []);
+    };
+
+    const fetchProduct = async () => {
+        if (!id) return;
+        setLoading(true);
+        try {
+            const product: Product = await getProductById(Number(id));
+            setForm({
+                name: product.name,
+                sku: product.sku,
+                description: product.description,
+                price: product.price,
+                quantity: product.quantity,
+                categoryId: product.category?.id?.toString() || "",
+            });
+        } catch {
+            alert("Failed to load product.");
+            navigate("/admin");
+        }
+        setLoading(false);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -51,18 +78,18 @@ const AddProduct: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await addProduct({
+            await updateProduct(Number(id), {
                 name: form.name,
-                sku: form.sku, // <-- Send SKU
+                sku: form.sku,
                 description: form.description,
                 price: Number(form.price),
                 quantity: Number(form.quantity),
                 categoryId: Number(form.categoryId),
             });
-            navigate("/");
+            navigate("/admin");
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
-            alert("Failed to add product");
+            alert("Failed to update product");
         }
     };
 
@@ -81,9 +108,11 @@ const AddProduct: React.FC = () => {
         setAddingCategory(false);
     };
 
+    if (loading) return <div>Loading...</div>;
+
     return (
         <div>
-            <h2>Add Product</h2>
+            <h2>Edit Product</h2>
             <form onSubmit={handleSubmit} style={{ maxWidth: 400 }}>
                 <div style={{ marginBottom: 10 }}>
                     <label>
@@ -186,7 +215,7 @@ const AddProduct: React.FC = () => {
                         </div>
                     </label>
                 </div>
-                <button type="submit">Add Product</button>
+                <button type="submit">Update Product</button>
             </form>
 
             <hr style={{ margin: "2em 0" }} />
@@ -211,4 +240,4 @@ const AddProduct: React.FC = () => {
     );
 };
 
-export default AddProduct;
+export default EditProduct;

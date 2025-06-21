@@ -1,6 +1,21 @@
+/**
+ * Home.tsx
+ *
+ * This is the public home page of the inventory system.
+ *
+ * Features:
+ * - Displays a list of all products (or a subset, if desired).
+ * - May provide links to product details or other public features.
+ *
+ * Dependencies:
+ * - Relies on API functions for fetching products.
+ */
+
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../api";
 import type {Product} from "../types/Product";
+
+
 
 const Home: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
