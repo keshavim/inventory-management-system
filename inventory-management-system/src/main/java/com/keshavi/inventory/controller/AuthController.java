@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * REST controller for authentication endpoints.
  * Handles user registration and login.
@@ -40,15 +43,18 @@ public class AuthController {
         return ResponseEntity.ok("User registered successfully");
     }
 
-    // Updated login endpoint
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         User user = userRepository.findByUsername(request.getUsername()).orElse(null);
         if (user == null || !passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
-        // Optionally, you can return user info or a token here
-        return ResponseEntity.ok("Login successful");
+        // Return user info (id, username, role)
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("id", user.getId());
+        userInfo.put("username", user.getUsername());
+        userInfo.put("role", user.getRole());
+        return ResponseEntity.ok(userInfo);
     }
 }
 

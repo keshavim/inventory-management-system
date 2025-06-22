@@ -83,3 +83,17 @@ export const getStockReport = async (): Promise<StockReportDTO[]> => {
     const res = await axios.get<StockReportDTO[]>("/api/products/stock-report");
     return res.data;
 };
+
+
+//   AUTH API
+
+export type User = {
+    id: number;
+    username: string;
+    role: "USER" | "ADMIN";
+};
+
+export const login = async (username: string, password: string): Promise<User> => {
+    const res = await axios.post<User>("/api/auth/login", { username, password });
+    return res.data;
+};

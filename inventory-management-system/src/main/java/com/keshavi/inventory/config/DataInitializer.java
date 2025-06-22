@@ -22,4 +22,16 @@ public class DataInitializer {
             }
         };
     }
+    @Bean
+    public CommandLineRunner initTestUser(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        return args -> {
+            if (!userRepository.existsByUsername("testuser")) {
+                User user = new User();
+                user.setUsername("testuser");
+                user.setPassword(passwordEncoder.encode("testpassword")); // Set a secure password!
+                user.setRole(User.Role.USER);
+                userRepository.save(user);
+            }
+        };
+    }
 }

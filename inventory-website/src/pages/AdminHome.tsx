@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 import { getCategories, updateCategory, deleteCategory, getProducts, deleteProduct } from "../api";
 import type { Category } from "../types/Category";
 import type { Product } from "../types/Product";
-
+import { useAuth } from "../auth/AuthContext";
 
 
 const AdminHome: React.FC = () => {
@@ -94,8 +94,12 @@ const AdminHome: React.FC = () => {
         setDeletingProductId(null);
     };
 
+    const { logout } = useAuth();
+
+
     return (
         <div style={{ maxWidth: 600, margin: "2em auto" }}>
+            <button onClick={logout}>Logout</button>
             {/* Category Dropdown and Actions */}
             <div style={{ marginBottom: "2em", display: "flex", alignItems: "center", gap: "1em" }}>
                 <select
