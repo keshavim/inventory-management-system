@@ -7,6 +7,7 @@ import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
 import UserHome from "./pages/UserHome.tsx";
 import AccessDenied from "./pages/AccessDenied";
+import Items from "./pages/Items";
 
 import ProtectedRoute from './auth/ProtectedRoute';
 import { AuthProvider } from './auth/AuthContext';
@@ -18,6 +19,8 @@ const App: React.FC = () => (
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/access-denied" element={<AccessDenied />} />
+                <Route path="/items" element={<Items />} />
+
 
 
                 {/* User profile pages: require login */}

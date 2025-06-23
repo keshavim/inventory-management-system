@@ -33,6 +33,23 @@ const Home: React.FC = () => {
                     Login
                 </Link>
             </div>
+            <div style={{ marginBottom: "1em" }}>
+                <Link
+                to="/items"
+                style={{
+                    padding: "0.5em 1em",
+                    background: "#ff9900",
+                    color: "#fff",
+                    borderRadius: "4px",
+                    textDecoration: "none",
+                    fontWeight: "bold",
+                    marginTop: "2em",
+                    display: "inline-block"
+                }}
+            >
+                    View Products
+                </Link>
+            </div>
         </div>
     );
 };

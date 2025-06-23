@@ -23,8 +23,9 @@ const Login: React.FC = () => {
             if (user.role === "ADMIN") {
                 navigate("/admin");
             } else {
-                navigate("/user-home");
+                navigate("/profile");
             }
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
             setError("Invalid username or password");
         }
